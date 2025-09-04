@@ -1,0 +1,112 @@
+# BibP v2.0 - Production Requirements
+# Complete dependency list for the production-ready reference PDF retriever
+
+# =====================================================
+# CORE GUI FRAMEWORK
+# =====================================================
+PyQt6>=6.6.0
+# GUI framework for the main interface
+
+# =====================================================
+# HTTP & API CLIENTS
+# =====================================================
+requests>=2.31.0
+# HTTP requests for API calls and PDF downloads
+
+semanticscholar>=0.8.0
+# Semantic Scholar API client for academic papers
+
+habanero>=1.2.0  
+# Crossref API client for DOI resolution
+
+# =====================================================
+# REFERENCE EXTRACTION & PROCESSING
+# =====================================================
+refextract>=0.3.8
+# CERN's reference extraction library (fallback method)
+
+# =====================================================
+# RELIABILITY & ERROR HANDLING  
+# =====================================================
+tenacity>=8.2.0
+# Retry logic with exponential backoff for API calls
+
+# =====================================================
+# OPTIONAL ENHANCEMENTS
+# =====================================================
+
+# Enhanced reference extraction (if GROBID not available)
+# grobid-client-python>=0.8.0
+
+# Enhanced arXiv handling  
+# arxiv>=2.1.0
+
+# Better text processing for reference cleaning
+# nltk>=3.8
+# spacy>=3.7.0
+
+# Advanced PDF processing
+# pymupdf>=1.23.0
+
+# Database storage for reference caching
+# sqlite3  # (built-in to Python)
+
+# Configuration file support
+# pyyaml>=6.0
+# toml>=0.10.2
+
+# Enhanced logging and monitoring
+# colorlog>=6.7.0
+# tqdm>=4.66.0
+
+# =====================================================
+# DEVELOPMENT & TESTING (Optional)
+# =====================================================
+
+# Testing framework
+# pytest>=7.4.0
+# pytest-qt>=4.2.0
+# pytest-mock>=3.11.0
+
+# Code quality
+# black>=23.0.0
+# flake8>=6.0.0
+# mypy>=1.5.0
+
+# Documentation
+# sphinx>=7.1.0
+# sphinx-rtd-theme>=1.3.0
+
+# =====================================================
+# SYSTEM-SPECIFIC NOTES
+# =====================================================
+
+# Windows users may need:
+# pywin32>=306  # For file operations
+
+# Linux users may need:
+# python3-tk  # For tkinter (system package)
+
+# macOS users should be covered by standard packages
+
+# =====================================================
+# GROBID INTEGRATION NOTES
+# =====================================================
+# 
+# GROBID should be running as a Docker service:
+# docker run --rm --init -p 8070:8070 grobid/grobid:0.8.1
+#
+# No additional Python packages needed for GROBID integration
+# (uses direct HTTP API calls)
+#
+# =====================================================
+
+# Installation order (if issues occur):
+# 1. pip install --upgrade pip setuptools wheel
+# 2. pip install PyQt6 requests tenacity
+# 3. pip install semanticscholar habanero refextract  
+# 4. pip install -r requirements.txt
+
+# Minimum Python version: 3.8+
+# Recommended Python version: 3.9-3.11
+# Tested on: Python 3.9, 3.10, 3.11

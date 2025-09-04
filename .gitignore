@@ -1,0 +1,35 @@
+# Sensitive configuration files
+config.py
+
+# Any personal configuration
+config_local.py
+personal_config.py
+
+# API keys, credentials, and personal info
+*.key
+secrets.json
+credentials.json
+
+# Logs that might contain personal info
+*.log
+bibp_log_*.txt
+
+# Environment files
+.env
+.env.local
+
+# PyQt settings
+*.ini
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Output directories
+*_refs/
+downloads/
+
+# OS files
+.DS_Store
+Thumbs.db
