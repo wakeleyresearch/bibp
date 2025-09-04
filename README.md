@@ -1,4 +1,4 @@
-# BibP v2.0 - Reference PDF Retriever 🚀
+# BibP v2.0 - Reference PDF Retriever
 
 **Automatically download open-access PDFs from academic paper references with cutting-edge extraction and multi-API resolution.**
 
@@ -6,32 +6,32 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![GROBID](https://img.shields.io/badge/GROBID-0.8.1-green.svg)](https://grobid.readthedocs.io/)
 
-## ✨ Key Features
+## Key Features
 
-- 🔬 **GROBID Integration** - Superior reference extraction with structured metadata
-- 🌐 **Multi-API Support** - 7+ APIs for maximum coverage (arXiv, OpenAlex, Semantic Scholar, PubMed, etc.)
-- 🎯 **Intelligent Prioritization** - Smart source ordering for optimal success rates
-- ⚡ **Parallel Processing** - Configurable threading with intelligent rate limiting
-- 📊 **Real-time Analytics** - Live progress tracking and success rate monitoring
-- 🛡️ **Robust Error Handling** - Automatic retries and graceful degradation
-- 🎨 **Modern GUI** - Tabbed interface with drag-and-drop support
-- 📋 **CLI Mode** - Command-line interface for automation and scripting
+- **GROBID Integration** - Superior reference extraction with structured metadata
+- **Multi-API Support** - 7+ APIs for maximum coverage (arXiv, OpenAlex, Semantic Scholar, PubMed, etc.)
+- **Intelligent Prioritization** - Smart source ordering for optimal success rates
+- **Parallel Processing** - Configurable threading with intelligent rate limiting
+- **Real-time Analytics** - Live progress tracking and success rate monitoring
+- **Robust Error Handling** - Automatic retries and graceful degradation
+- **Modern GUI** - Tabbed interface with drag-and-drop support
+- **CLI Mode** - Command-line interface for automation and scripting
 
-## 🎯 What's New in v2.0
+## What's New in v2.0
 
-### 🔄 Complete Architecture Overhaul
+### Complete Architecture Overhaul
 - **Production-ready codebase** with comprehensive error handling
 - **Modular design** with clear separation of concerns
 - **Configuration management** with environment variable support
 - **Comprehensive logging** and debugging capabilities
 
-### 🔬 Enhanced Reference Extraction
+### Enhanced Reference Extraction
 - **GROBID integration** for state-of-the-art reference parsing
 - **Quality scoring** system for reference validation
 - **Fallback mechanisms** (GROBID → refextract)
 - **Smart query cleaning** to improve API match rates
 
-### 🌐 Expanded API Coverage
+### Expanded API Coverage
 | API | Coverage | Rate Limit | Priority |
 |-----|----------|------------|----------|
 | **arXiv** | Preprints (CS/Math/Physics) | 10/s | 1 |
@@ -42,39 +42,41 @@
 | **PubMed/PMC** | Biomedical papers | 3/s | 6 |
 | **CORE** | UK repositories | 1/s | 7 |
 
-### 📊 Advanced Analytics & Monitoring
+### Advanced Analytics & Monitoring
 - **Real-time success rate tracking**
 - **Source attribution and statistics**
 - **Reference extraction quality analysis**
 - **Performance metrics and response times**
 
-## 🚀 Quick Start
+## Quick Start
 
-### 1. Install Dependencies
+### 1. Clone and Install
 ```bash
 # Clone the repository
-git clone https://github.com/your-repo/bibp.git
+git clone https://github.com/wakeleyresearch/bibp.git
 cd bibp
 
 # Install Python packages
 pip install -r requirements.txt
+```
 
-# Start GROBID (Docker required)
+### 2. Configure BibP
+```bash
+# Copy configuration template
+cp config_template.py config.py
+
+# Edit config.py and replace:
+# - YOUR_EMAIL_HERE with your email address
+# - YOUR_SEMANTIC_SCHOLAR_API_KEY_HERE with your API key (get from https://www.semanticscholar.org/product/api)
+```
+
+### 3. Start GROBID
+```bash
+# Start GROBID Docker container (required for best reference extraction)
 docker run --rm --init -p 8070:8070 grobid/grobid:0.8.1
 ```
 
-### 2. Run Automated Setup
-```bash
-python setup.py
-```
-This will:
-- ✅ Check system requirements
-- ✅ Install Python dependencies
-- ✅ Start GROBID Docker container
-- ✅ Create configuration files
-- ✅ Test all components
-
-### 3. Launch BibP
+### 4. Launch BibP
 ```bash
 # GUI mode (recommended)
 python main.py
@@ -86,7 +88,7 @@ python main.py --cli paper.pdf
 python main.py --test
 ```
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### GUI Mode (Recommended)
 1. **Launch BibP**: `python main.py`
@@ -115,14 +117,14 @@ python main.py --diagnose paper.pdf
 # Set via environment variables
 export BIBP_EMAIL="your-email@domain.com"
 export SEMANTIC_SCHOLAR_API_KEY="your-api-key"
-export BIBP_MAX_THREADS=6
+export BIBP_MAX_THREADS=16
 export GROBID_URL="http://localhost:8070"
 
-# Or edit bibp_config.sh and run:
+# Or use the provided configuration script
 source bibp_config.sh
 ```
 
-## 🏗️ System Architecture
+## System Architecture
 
 ### Core Components
 
@@ -170,11 +172,11 @@ PDF Input
                                       └─────────────┘
 ```
 
-## 🔧 Advanced Configuration
+## Advanced Configuration
 
 ### API Rate Limiting
 ```python
-# Custom rate limits (requests/second)
+# Custom rate limits (requests/second) in config.py
 config.apis['semantic_scholar'].rate_limit = 1.0
 config.apis['openalex'].rate_limit = 15.0
 config.apis['unpaywall'].rate_limit = 10.0
@@ -194,37 +196,39 @@ config.min_title_length = 10
 ### Processing Options
 ```python
 # Threading and performance
-config.max_threads = 8
+config.max_threads = 16
 config.min_pdf_size = 1000  # bytes
 
 # File naming
 config.max_filename_length = 150
-config.output_dir_suffix = "_references"
+config.output_dir_suffix = "_refs"
 ```
 
-## 📊 Success Rate Optimization
+## Expected Performance
 
-### Expected Performance by Domain
+### Success Rates by Domain
 | Domain | Typical Success Rate | Best APIs |
 |--------|---------------------|-----------|
-| **Computer Science** | 70-85% | arXiv, Semantic Scholar, OpenAlex |
-| **Mathematics** | 60-75% | arXiv, OpenAlex, Crossref |
-| **Biomedical** | 65-80% | PubMed/PMC, Unpaywall, OpenAlex |
-| **Physics** | 75-85% | arXiv, OpenAlex, Crossref |
-| **General Sciences** | 55-70% | OpenAlex, Unpaywall, Crossref |
+| **Computer Science** | 20-30% | arXiv, Semantic Scholar, OpenAlex |
+| **Mathematics** | 15-25% | arXiv, OpenAlex, Crossref |
+| **Biomedical** | 20-30% | PubMed/PMC, Unpaywall, OpenAlex |
+| **Physics** | 25-35% | arXiv, OpenAlex, Crossref |
+| **Engineering** | 10-20% | OpenAlex, Unpaywall, Crossref |
+
+*Success rates depend on paper age, publisher policies, and reference quality*
 
 ### Optimization Tips
-1. **Use GROBID** - Improves extraction quality by 40-60%
+1. **Use GROBID** - Dramatically improves extraction quality
 2. **Get API Keys** - Semantic Scholar key increases rate limits
-3. **Recent Papers** - Higher OA availability for papers after 2010
-4. **Publisher Variety** - Mixed sources perform better than single-publisher refs
+3. **Recent Papers** - Higher OA availability for papers after 2015
+4. **Mixed Sources** - Diverse reference lists perform better
 5. **Clean References** - Well-formatted bibliographies have higher success rates
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
-#### Low Success Rate (< 30%)
+#### Low Success Rate (< 10%)
 ```bash
 # Diagnose reference extraction quality
 python main.py --diagnose your_paper.pdf
@@ -239,8 +243,8 @@ python main.py --test
 #### GROBID Connection Issues
 ```bash
 # Restart GROBID container
-docker stop grobid_bibp
-docker run --name grobid_bibp --rm --init -p 8070:8070 grobid/grobid:0.8.1
+docker stop $(docker ps -q --filter ancestor=grobid/grobid:0.8.1)
+docker run --rm --init -p 8070:8070 grobid/grobid:0.8.1
 
 # Check Docker status
 docker ps
@@ -249,7 +253,7 @@ docker ps
 #### API Rate Limiting
 ```bash
 # Reduce thread count
-export BIBP_MAX_THREADS=2
+export BIBP_MAX_THREADS=4
 
 # Lower API rates
 export BIBP_SEMANTIC_SCHOLAR_RATE=0.5
@@ -268,7 +272,7 @@ export BIBP_LOG_API_CALLS=true
 python main.py --test
 ```
 
-## 🔬 Technical Details
+## Technical Details
 
 ### Reference Extraction Quality Metrics
 - **Title Extraction Rate**: Percentage of references with clean titles
@@ -288,49 +292,31 @@ python main.py --test
 - **Disk Usage**: Output PDFs + temporary files during processing
 - **Network**: Optimized for batch API calls with connection pooling
 
-## 🚧 Development
+## Development
 
-### Development Setup
+### Setup for Development
 ```bash
-# Clone with development dependencies
-git clone https://github.com/your-repo/bibp.git
+# Clone repository
+git clone https://github.com/wakeleyresearch/bibp.git
 cd bibp
 
-# Install dev dependencies
+# Install development dependencies
 pip install -r requirements.txt
-pip install pytest pytest-qt black flake8 mypy
+
+# Run automated setup (optional)
+python setup_script.py
 
 # Run tests
-pytest tests/
-
-# Code formatting
-black *.py
-flake8 *.py
+python main.py --test
 ```
 
 ### Contributing
 1. **Fork** the repository
 2. **Create** a feature branch: `git checkout -b feature-name`
-3. **Test** your changes: `pytest tests/`
-4. **Format** code: `black *.py`
-5. **Submit** a pull request
+3. **Test** your changes thoroughly
+4. **Submit** a pull request with clear description
 
-### Testing
-```bash
-# Unit tests
-pytest tests/test_extractor.py
-pytest tests/test_downloader.py
-
-# Integration tests
-pytest tests/test_integration.py
-
-# GUI tests
-pytest tests/test_gui.py
-```
-
-## 📚 API Documentation
-
-### Core Functions
+### Core API Functions
 ```python
 # Reference extraction
 from extractor import extract_references
@@ -342,44 +328,45 @@ results = download_references_parallel(references, "paper.pdf")
 
 # Configuration
 from config import config
-config.max_threads = 8
+config.max_threads = 16
 ```
 
-### Custom Integration
-```python
-# Custom API source
-from downloader import ReferenceProcessor
+## Dependencies
 
-processor = ReferenceProcessor()
-# Add custom source handler
-processor.source_handlers['custom_api'] = my_custom_handler
-```
+### Required
+- Python 3.8+
+- Docker (for GROBID)
+- PyQt6 (GUI framework)
+- requests (HTTP client)
+- refextract (fallback extraction)
+- tenacity (retry logic)
 
-## 🎯 Roadmap
+### API Clients
+- semanticscholar (Semantic Scholar API)
+- habanero (Crossref API)
+
+### Optional Enhancements
+- Semantic Scholar API key (higher rate limits)
+- Institutional API access (Web of Science, InCites)
+
+## Roadmap
 
 ### v2.1 (Next Release)
-- [ ] **HAL Repository Integration** - French academic repository
-- [ ] **Institutional Repository Support** - University-specific sources  
+- [ ] **Web of Science Integration** - Enhanced coverage for all domains
+- [ ] **HAL Repository Support** - French academic repository
 - [ ] **Citation Format Export** - BibTeX, EndNote, RIS output
 - [ ] **Batch Processing API** - REST API for automated workflows
 
 ### v2.2 (Future)
 - [ ] **Machine Learning Ranking** - AI-powered source prioritization
 - [ ] **PDF Full-text Search** - Content-based reference matching
-- [ ] **Collaborative Filtering** - Community-driven source recommendations
 - [ ] **Browser Extension** - Direct integration with academic websites
 
-### v3.0 (Long-term)
-- [ ] **Web Application** - Browser-based interface
-- [ ] **Cloud Deployment** - Hosted service option
-- [ ] **Enterprise Features** - Team management and analytics
-- [ ] **Academic Publisher Partnerships** - Direct API access
-
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **GROBID Team** - Excellent reference extraction service
 - **OpenAlex** - Comprehensive academic database
@@ -387,24 +374,13 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - **Unpaywall** - Open access advocacy and data
 - **CERN** - refextract library for reference parsing
 
-## 📞 Support
+## Support
 
-- **GitHub Issues**: [Report bugs and request features](https://github.com/your-repo/bibp/issues)
+- **GitHub Issues**: [Report bugs and request features](https://github.com/wakeleyresearch/bibp/issues)
 - **Documentation**: This README and inline code comments
-- **Discussions**: [Community discussions](https://github.com/your-repo/bibp/discussions)
-
-## 📈 Statistics
-
-*Updated regularly with usage statistics*
-
-- **Total Downloads**: 10,000+
-- **Average Success Rate**: 68%
-- **Papers Processed**: 100,000+
-- **APIs Integrated**: 7
-- **Languages Supported**: English (primary)
 
 ---
 
-**Happy Reference Hunting!** 🎯📚
+**Built for the academic research community**
 
-*Built with ❤️ for the academic research community*
+*Facilitating open access to scientific literature*
