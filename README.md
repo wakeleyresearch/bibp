@@ -211,13 +211,18 @@ config.output_dir_suffix = "_refs"
 ### Success Rates by Domain
 | Domain | Typical Success Rate | Best APIs |
 |--------|---------------------|-----------|
-| **Computer Science** | 20-30% | arXiv, Semantic Scholar, OpenAlex |
-| **Mathematics** | 15-25% | arXiv, OpenAlex, Crossref |
-| **Biomedical** | 20-30% | PubMed/PMC, Unpaywall, OpenAlex |
-| **Physics** | 25-35% | arXiv, OpenAlex, Crossref |
-| **Engineering** | 10-20% | OpenAlex, Unpaywall, Crossref |
+| **Computer Science (ML/AI)** | 70-90% | arXiv, OpenAlex, Semantic Scholar |
+| **Computer Science (General)** | 60-80% | arXiv, OpenAlex, Semantic Scholar, Crossref |
+| **Mathematics** | 50-70% | arXiv, OpenAlex, Crossref |
+| **Biomedical** | 50-70% | PubMed/PMC, Unpaywall, OpenAlex |
+| **Physics** | 60-80% | arXiv, OpenAlex, Crossref |
+| **Engineering** | 40-60% | OpenAlex, Unpaywall, Crossref |
 
-*Success rates depend on paper age, publisher policies, and reference quality*
+### Notes
+- Performance varies significantly by paper age, venue, and field
+- Recent ML/AI papers show exceptional success rates due to arXiv prevalence
+- Older papers or non-CS fields may show lower success rates
+- The multi-API approach provides robust fallback options
 
 ### Optimization Tips
 1. **Use GROBID** - Dramatically improves extraction quality
