@@ -19,6 +19,8 @@
 
 ## What's New in v2.0
 
+![BibP v2.0 Test](tests/bibPtest.png)
+
 ### Complete Architecture Overhaul
 - **Production-ready codebase** with comprehensive error handling
 - **Modular design** with clear separation of concerns
